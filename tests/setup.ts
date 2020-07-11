@@ -1,6 +1,6 @@
 import { NextFn } from 'type-graphql'
 import { AuthorizerData } from '../types'
-import { Authorizer, Allow, Deny, registerAuthorizerMiddleware, Effect } from '..'
+import { Authorizer, Allow, Deny, registerTypeGraphqlGlobalMiddleware, Effect } from '..'
 
 @Authorizer()
 class PostDenyResolver {
@@ -29,7 +29,7 @@ new UserAllowResolver()
 
 export const buildContext: any = (fieldName: string) => ({ args: {}, info: { fieldName }, context: {}, root: {} })
 
-export const middleware = registerAuthorizerMiddleware(async ({ authorizer }: AuthorizerData, next: NextFn) => {
+export const middleware = registerTypeGraphqlGlobalMiddleware(async ({ authorizer }: AuthorizerData, next: NextFn) => {
   // console.log('Authorizer', authorizer)
 
   if (authorizer.effect === Effect.ALLOW) {
