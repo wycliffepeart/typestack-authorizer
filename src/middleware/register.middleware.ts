@@ -3,13 +3,16 @@ import { MiddlewareFn, NextFn, ResolverData } from 'type-graphql'
 import { getAuthorizerMetadataStorage } from '../metadata/get.storage'
 import { registerAuthorizerMiddlewareCallback } from './middleware.callback'
 
-export const registerTypeGraphqlGlobalMiddleware = (asyncCallback: AuthorizerMiddlewareCallback): MiddlewareFn => async (context: ResolverData, next: NextFn) => {  
-  const authorizerData = getAuthorizerMetadataStorage().authorizer
-  if (authorizerData.hasOwnProperty(context.info.fieldName)) {
-    const callback = registerAuthorizerMiddlewareCallback(asyncCallback)
+export function registerTypeGraphqlGlobalMiddleware(asyncCallback: AuthorizerMiddlewareCallback): MiddlewareFn {
 
-    await callback({ ...context, authorizer: authorizerData[context.info.fieldName] }, next)
-  } else {
-    return await next()
+  return async (context: ResolverData, next: NextFn) => {  
+    const authorizerData = getAuthorizerMetadataStorage().authorizer
+    if (authorizerData.hasOwnProperty(context.info.fieldName)) {
+      const callback = registerAuthorizerMiddlewareCallback(asyncCallback)
+  
+      await callback({ ...context, authorizer: authorizerData[context.info.fieldName] }, next)
+    } else {
+      return await next()
+    }
   }
 }

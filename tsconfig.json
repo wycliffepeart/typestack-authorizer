@@ -4,6 +4,7 @@
     "module": "commonjs",
     "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
     "sourceMap": true,
+    "outDir": "./dist",
     "moduleResolution": "node",
     "declarationDir": "types",
     "declaration": true,
@@ -24,6 +25,6 @@
     "baseUrl": ".",
     "rootDir": "./src"
   },
-  "exclude": ["node_modules", "tests", "/**/*.d.ts"],
+  "exclude": ["node_modules", "tests", "/**/*.d.ts", "types/**/*.d.ts"],
   "include": ["./**/*.ts"]
 }
