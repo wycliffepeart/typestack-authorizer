@@ -6,7 +6,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "moduleResolution": "node",
-    "declaration": false,
+    "declaration": true,
     "composite": false,
     "removeComments": true,
     "noImplicitAny": false,
@@ -22,7 +22,7 @@
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "rootDir": "."
+    "rootDir": "./src"
   },
   "exclude": ["node_modules", "tests"],
   "include": ["./**/*.ts"]
