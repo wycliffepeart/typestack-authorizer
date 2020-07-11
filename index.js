@@ -7,7 +7,7 @@
 		var a = factory();
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(window, function() {
+})(global, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -111,71 +111,44 @@ var Effect;
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-var g;
+"use strict";
 
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getAuthorizerMetadataStorage = void 0;
+const metadata_storage_1 = __webpack_require__(7);
+function getAuthorizerMetadataStorage() {
+    return global.SkeletonMetadataStorage || (global.SkeletonMetadataStorage = new metadata_storage_1.AuthorizerMetadataStorage());
 }
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
+exports.getAuthorizerMetadataStorage = getAuthorizerMetadataStorage;
+//# sourceMappingURL=get.storage.js.map
 
 /***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAuthorizerMetadataStorage = void 0;
-const metadata_storage_1 = __webpack_require__(9);
-function getAuthorizerMetadataStorage() {
-    return global.SkeletonMetadataStorage || (global.SkeletonMetadataStorage = new metadata_storage_1.AuthorizerMetadataStorage());
-}
-exports.getAuthorizerMetadataStorage = getAuthorizerMetadataStorage;
-//# sourceMappingURL=get.storage.js.map
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(4);
-var deny_1 = __webpack_require__(6);
+__webpack_require__(3);
+var deny_1 = __webpack_require__(4);
 Object.defineProperty(exports, "Deny", { enumerable: true, get: function () { return deny_1.Deny; } });
-var allow_1 = __webpack_require__(7);
+var allow_1 = __webpack_require__(5);
 Object.defineProperty(exports, "Allow", { enumerable: true, get: function () { return allow_1.Allow; } });
 var effect_1 = __webpack_require__(0);
 Object.defineProperty(exports, "Effect", { enumerable: true, get: function () { return effect_1.Effect; } });
-var authorizer_1 = __webpack_require__(8);
+var authorizer_1 = __webpack_require__(6);
 Object.defineProperty(exports, "Authorizer", { enumerable: true, get: function () { return authorizer_1.Authorizer; } });
-var register_middleware_1 = __webpack_require__(10);
+var register_middleware_1 = __webpack_require__(8);
 Object.defineProperty(exports, "registerTypeGraphqlGlobalMiddleware", { enumerable: true, get: function () { return register_middleware_1.registerTypeGraphqlGlobalMiddleware; } });
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 3 */
+/***/ (function(module, exports) {
 
-/* WEBPACK VAR INJECTION */(function(process, global) {/*! *****************************************************************************
+/*! *****************************************************************************
 Copyright (C) Microsoft. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
@@ -1307,200 +1280,9 @@ var Reflect;
     });
 })(Reflect || (Reflect = {}));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5), __webpack_require__(1)))
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 6 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1515,7 +1297,7 @@ exports.Deny = Deny;
 //# sourceMappingURL=deny.js.map
 
 /***/ }),
-/* 7 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1530,7 +1312,7 @@ exports.Allow = Allow;
 //# sourceMappingURL=allow.js.map
 
 /***/ }),
-/* 8 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1538,7 +1320,7 @@ exports.Allow = Allow;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Authorizer = void 0;
 const effect_1 = __webpack_require__(0);
-const get_storage_1 = __webpack_require__(2);
+const get_storage_1 = __webpack_require__(1);
 function Authorizer(effect) {
     return function (Target) {
         const resolverNames = Object.getOwnPropertyNames(Target.prototype).filter((item) => item !== 'constructor');
@@ -1567,7 +1349,7 @@ exports.Authorizer = Authorizer;
 //# sourceMappingURL=authorizer.js.map
 
 /***/ }),
-/* 9 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1592,7 +1374,7 @@ exports.AuthorizerMetadataStorage = AuthorizerMetadataStorage;
 //# sourceMappingURL=metadata.storage.js.map
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1608,8 +1390,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerTypeGraphqlGlobalMiddleware = void 0;
-const get_storage_1 = __webpack_require__(2);
-const middleware_callback_1 = __webpack_require__(11);
+const get_storage_1 = __webpack_require__(1);
+const middleware_callback_1 = __webpack_require__(9);
 function registerTypeGraphqlGlobalMiddleware(asyncCallback) {
     return (context, next) => __awaiter(this, void 0, void 0, function* () {
         const authorizerData = get_storage_1.getAuthorizerMetadataStorage().authorizer;
@@ -1626,11 +1408,11 @@ exports.registerTypeGraphqlGlobalMiddleware = registerTypeGraphqlGlobalMiddlewar
 //# sourceMappingURL=register.middleware.js.map
 
 /***/ }),
-/* 11 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
+
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -1657,7 +1439,6 @@ function invokeAuthorizerMiddlewareCallback(resolverData) {
 }
 exports.invokeAuthorizerMiddlewareCallback = invokeAuthorizerMiddlewareCallback;
 //# sourceMappingURL=middleware.callback.js.map
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
 
 /***/ })
 /******/ ]);
