@@ -1,4 +1,4 @@
-import { AuthorizerResolverMetadataOptions } from '../../types'
+import { AuthorizerResolverMetadataOptions } from '../../types/definitions'
 
 export class AuthorizerMetadataStorage {
   readonly authorizer: { [key: string]: AuthorizerResolverMetadataOptions } = {}

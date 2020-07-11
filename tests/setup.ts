@@ -1,5 +1,5 @@
 import { NextFn } from 'type-graphql'
-import { AuthorizerData } from '../types'
+import { AuthorizerData } from '../types/definitions'
 import { Authorizer, Allow, Deny, registerTypeGraphqlGlobalMiddleware, Effect } from '..'
 
 @Authorizer()

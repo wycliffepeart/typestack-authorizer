@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-export { AuthorizerData } from './types'
+export { AuthorizerData } from './types/definitions'
 export { Deny } from './src/authorizer/deny'
 export { Allow } from './src/authorizer/allow'
 export { Effect } from './src/authorizer/effect'
