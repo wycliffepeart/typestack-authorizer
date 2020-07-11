@@ -1,4 +1,4 @@
-import 'reflect-metadata'
+require('reflect-metadata')
 export { AuthorizerData } from './types'
 export { Deny } from './src/authorizer/deny'
 export { Allow } from './src/authorizer/allow'
