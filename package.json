@@ -2,7 +2,7 @@
   "name": "typestack-authorizer",
   "version": "0.0.4",
   "description": "",
-  "main": "index.ts",
+  "main": "dist/index.ts",
   "scripts": {
     "test": "mocha --colors -r ts-node/register tests/**/*.test.ts"
   },
