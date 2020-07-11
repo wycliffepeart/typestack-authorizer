@@ -1,4 +1,4 @@
-import { AuthorizerMiddlewareCallback, AuthorizerData } from '../../types/definitions'
+import { AuthorizerMiddlewareCallback, AuthorizerData } from '../types'
 
 const SingletonAuthorizerCallbackKey = 'SingletonAuthorizerCallbackKey'
 

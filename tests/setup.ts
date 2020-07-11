@@ -1,6 +1,6 @@
 import { NextFn } from 'type-graphql'
-import { AuthorizerData } from '../types/definitions'
-import { Authorizer, Allow, Deny, registerTypeGraphqlGlobalMiddleware, Effect } from '..'
+import { AuthorizerData } from '../types'
+import { Authorizer, Allow, Deny, registerTypeGraphqlGlobalMiddleware, Effect } from '../src'
 
 @Authorizer()
 class PostDenyResolver {

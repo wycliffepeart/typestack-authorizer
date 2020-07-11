@@ -1,4 +1,4 @@
-import { Effect } from '../'
+import { Effect } from '../src'
 import { Suite } from 'mocha'
 import { expect } from 'chai'
 import {buildContext, middleware} from './setup'

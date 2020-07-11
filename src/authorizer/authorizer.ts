@@ -1,5 +1,5 @@
 import { Effect } from './effect'
-import { ObjectLiteral } from '../../types/definitions'
+import { ObjectLiteral } from '../types'
 import { getAuthorizerMetadataStorage } from '../metadata/get.storage'
 
 declare type AuthorizerClassDecoratorResult = <T extends { new (...args: any[]): ObjectLiteral }>(t: T) => any

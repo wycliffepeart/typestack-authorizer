@@ -1,4 +1,4 @@
-import { AuthorizerMiddlewareCallback } from '../../types/definitions'
+import { AuthorizerMiddlewareCallback } from '../types'
 import { MiddlewareFn, NextFn, ResolverData } from 'type-graphql'
 import { getAuthorizerMetadataStorage } from '../metadata/get.storage'
 import { registerAuthorizerMiddlewareCallback } from './middleware.callback'
