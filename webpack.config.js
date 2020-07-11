@@ -4,6 +4,7 @@ module.exports = {
   mode: 'production',
   entry: './dist/index.js',
   output: {
+    libraryTarget: "umd",
     path: path.resolve(__dirname),
     filename: 'index.js'
   },
