@@ -39,4 +39,5 @@ export const middleware = registerTypeGraphqlGlobalMiddleware(async ({ authorize
   } else {
     // else
   }
+  
 })
